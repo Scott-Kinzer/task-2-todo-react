@@ -24,7 +24,13 @@ const NotesTable = ({ notes, isArchive, chosenNote, chooseNote }: Props) => {
         return (
           <NoteRow
             isArchive={isArchive}
-            toggleArchiveNote={(id: string) => dispatch(toggleArchiveNote(id))}
+            toggleArchiveNote={(id: string) => {
+              dispatch(toggleArchiveNote(id));
+
+              if (chosenNote?.id === id) {
+                chooseNote(null);
+              }
+            }}
             removeNote={(id: string) => {
               dispatch(removeNote(id));
 
