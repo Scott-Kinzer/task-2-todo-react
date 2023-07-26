@@ -6,7 +6,6 @@ const HomePage = () => {
   return (
     <div>
       <Notes />
-      <NoteForm />
       <Summary />
     </div>
   );

@@ -17,19 +17,15 @@ export const notesSlice = createSlice({
   name: 'notes',
   initialState,
   reducers: {
-    // increment: (state) => {
-    //   state.value += 1
-    // },
-    // decrement: (state) => {
-    //   state.value -= 1
-    // },
-    // // Use the PayloadAction type to declare the contents of `action.payload`
-    // incrementByAmount: (state, action: PayloadAction<number>) => {
-    //   state.value += action.payload
-    // },
+    addNote: (state, action: PayloadAction<Note>) => {
+      state.notes.push(action.payload);
+    },
+    removeNote: (state, action: PayloadAction<string>) => {
+      state.notes = state.notes.filter((note) => note.id !== action.payload);
+    }
   },
 })
 
-// export const { increment, decrement, incrementByAmount } = counterSlice.actions
+export const { addNote, removeNote } = notesSlice.actions;
 
-export default notesSlice.reducer
+export default notesSlice.reducer;

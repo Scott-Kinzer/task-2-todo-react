@@ -1,25 +1,33 @@
-import React from 'react';
+import { noteCategory } from '../../../data';
+import { extractDates } from '../../../helpers/extractDate';
+import { formatDate } from '../../../helpers/formatDate';
+import { Note } from '../../../types/noteTypes';
 
-const NoteRow = () => {
+type Props = {
+  note: Note;
+  removeNote: (id: string) => void;
+};
+
+const NoteRow = ({ note, removeNote }: Props) => {
   return (
-    <div className="note-item grid h-[80px] grid-cols-tableNote gap-[20px] rounded-md bg-green-500 p-[10px]">
+    <div className="note-item mt-[20px] grid h-[80px] grid-cols-tableNote gap-[20px] rounded-md bg-green-500 p-[10px]">
       <div className="note-name flex items-center gap-[10px]">
         <img src="./images/task-icons/cart.svg" alt="" className="w-[20px]" />
-        <p>Shopping list</p>
+        <p>{note.name}</p>
       </div>
       <div className="note-created flex items-center">
-        <p>April 20, 2021</p>
+        <p>{formatDate(note.created)}</p>
       </div>
       <div className="note-category flex items-center">
-        <p>Random thought</p>
+        <p>{noteCategory[note.category].name}</p>
       </div>
       <div className="note-content flex	items-center overflow-hidden">
         <p className="inline-block w-full overflow-hidden text-ellipsis whitespace-nowrap">
-          The evolution
+          {note.content}
         </p>
       </div>
       <div className="note-date flex items-center">
-        <p>3/5/2021, 5/5/2021</p>
+        <p>{extractDates(note.content)}</p>
       </div>
       <div className="ml-auto flex gap-[20px]">
         <img
@@ -33,6 +41,7 @@ const NoteRow = () => {
           className="w-[20px] cursor-pointer"
         />
         <img
+          onClick={() => removeNote(note.id)}
           src="./images/icons/trash.svg"
           alt="trash"
           className="w-[20px] cursor-pointer"

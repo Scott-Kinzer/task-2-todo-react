@@ -7,7 +7,7 @@ type Props = {
 
 const SummaryRow = ({ note }: Props) => {
   return (
-    <div className="summary-note-item grid h-[80px] grid-cols-tripleFr gap-[10px] rounded-md bg-green-500 p-[10px]">
+    <div className="summary-note-item mt-[20px] grid h-[80px] grid-cols-tripleFr gap-[10px] rounded-md bg-green-500 p-[10px]">
       <div className="summary-note-item-category flex items-center gap-[10px]">
         <img
           src={noteCategory[note.categoryType].imagePath}

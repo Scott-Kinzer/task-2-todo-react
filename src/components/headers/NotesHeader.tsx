@@ -1,6 +1,10 @@
 import React from 'react';
 
-const HeaderNotes = () => {
+type Props = {
+  toggleNote: () => void;
+};
+
+const HeaderNotes = ({ toggleNote }: Props) => {
   return (
     <header className="header-notes grid grid-cols-headerNote gap-4 rounded-md bg-gray-500 p-4 text-white">
       <div className="flex items-center">
@@ -19,7 +23,7 @@ const HeaderNotes = () => {
         <p>Dates</p>
       </div>
       <div className="icons-header ml-auto grid grid-cols-doubleFr gap-4">
-        <div className="archive-icon cursor-pointer">
+        <div onClick={toggleNote} className="archive-icon cursor-pointer">
           <img
             src="/images/icons/archive.svg"
             alt="archive"

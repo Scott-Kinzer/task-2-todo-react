@@ -9,13 +9,9 @@ import { RootState } from '../redux-toolkit/store';
 const Summary = () => {
   const notes = useSelector((state: RootState) => state.notesSlice.notes);
 
-  console.log(notes);
-
   const filteredNotes = useMemo(() => {
     return filterNotes(notes);
   }, [notes]);
-
-  console.log(filteredNotes);
 
   return (
     <div className="mt-[40px]">
