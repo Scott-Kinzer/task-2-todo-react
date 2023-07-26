@@ -11,10 +11,11 @@ import NoteRow from './NoteRow';
 type Props = {
   notes: Note[];
   isArchive: boolean;
-  chooseNote: (note: Note) => void;
+  chooseNote: (note: Note | null) => void;
+  chosenNote: Note | null;
 };
 
-const NotesTable = ({ notes, isArchive, chooseNote }: Props) => {
+const NotesTable = ({ notes, isArchive, chosenNote, chooseNote }: Props) => {
   const dispatch = useDispatch();
 
   return (
@@ -24,7 +25,13 @@ const NotesTable = ({ notes, isArchive, chooseNote }: Props) => {
           <NoteRow
             isArchive={isArchive}
             toggleArchiveNote={(id: string) => dispatch(toggleArchiveNote(id))}
-            removeNote={(id: string) => dispatch(removeNote(id))}
+            removeNote={(id: string) => {
+              dispatch(removeNote(id));
+
+              if (chosenNote && chosenNote.id === id) {
+                chooseNote(null);
+              }
+            }}
             editNote={chooseNote}
             note={note}
             key={note.id}

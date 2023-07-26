@@ -58,6 +58,7 @@ const Notes = () => {
 
       dispatch(addNote(newNote));
     }
+    setChosenNoteForEdition(null);
   };
 
   return (
@@ -71,6 +72,7 @@ const Notes = () => {
           setChosenNoteForEdition(note);
           setIsShowForm(true);
         }}
+        chosenNote={chosenNoteForEdition}
         isArchive={isArchive}
         notes={filteredNotes}
       />

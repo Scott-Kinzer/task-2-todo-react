@@ -22,7 +22,10 @@ const NoteForm = ({ onSubmit, note }: Props) => {
       name: yup.string().required('Note name is required.'),
       content: yup.string().required('Note content is required.'),
     }),
-    onSubmit,
+    onSubmit: values => {
+      formik.resetForm();
+      onSubmit(values);
+    },
   });
 
   return (
