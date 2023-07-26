@@ -1,18 +1,32 @@
-import { noteCategory } from '../../../data';
-import { extractDates } from '../../../helpers/extractDate';
-import { formatDate } from '../../../helpers/formatDate';
-import { Note } from '../../../types/noteTypes';
+import { noteCategory } from 'data';
+
+import { extractDates } from 'helpers/extractDate';
+import { formatDate } from 'helpers/formatDate';
+import { Note } from 'types/noteTypes';
 
 type Props = {
+  isArchive: boolean;
   note: Note;
   removeNote: (id: string) => void;
+  toggleArchiveNote: (id: string) => void;
+  editNote: (note: Note) => void;
 };
 
-const NoteRow = ({ note, removeNote }: Props) => {
+const NoteRow = ({
+  note,
+  isArchive,
+  removeNote,
+  toggleArchiveNote,
+  editNote,
+}: Props) => {
   return (
     <div className="note-item mt-[20px] grid h-[80px] grid-cols-tableNote gap-[20px] rounded-md bg-green-500 p-[10px]">
       <div className="note-name flex items-center gap-[10px]">
-        <img src="./images/task-icons/cart.svg" alt="" className="w-[20px]" />
+        <img
+          src={noteCategory[note.category].imagePath}
+          alt=""
+          className="w-[20px]"
+        />
         <p>{note.name}</p>
       </div>
       <div className="note-created flex items-center">
@@ -30,22 +44,28 @@ const NoteRow = ({ note, removeNote }: Props) => {
         <p>{extractDates(note.content)}</p>
       </div>
       <div className="ml-auto flex gap-[20px]">
+        {!isArchive && (
+          <img
+            onClick={() => editNote(note)}
+            src="./images/icons/edit.svg"
+            alt="edit"
+            className="w-[20px] cursor-pointer"
+          />
+        )}
         <img
-          src="./images/icons/edit.svg"
-          alt="edit"
-          className="w-[20px] cursor-pointer"
-        />
-        <img
+          onClick={() => toggleArchiveNote(note.id)}
           src="./images/icons/archive.svg"
           alt="archive"
           className="w-[20px] cursor-pointer"
         />
-        <img
-          onClick={() => removeNote(note.id)}
-          src="./images/icons/trash.svg"
-          alt="trash"
-          className="w-[20px] cursor-pointer"
-        />
+        {!isArchive && (
+          <img
+            onClick={() => removeNote(note.id)}
+            src="./images/icons/trash.svg"
+            alt="trash"
+            className="w-[20px] cursor-pointer"
+          />
+        )}
       </div>
     </div>
   );

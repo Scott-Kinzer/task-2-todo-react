@@ -1,6 +1,5 @@
-import NoteForm from '../components/form/NoteForm';
-import Notes from '../sections/Notes';
-import Summary from '../sections/Summary';
+import Notes from 'sections/Notes';
+import Summary from 'sections/Summary';
 
 const HomePage = () => {
   return (

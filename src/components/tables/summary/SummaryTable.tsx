@@ -1,4 +1,4 @@
-import { NoteStatsResult } from '../../../helpers/filterNotes';
+import { NoteStatsResult } from 'helpers/filterNotes';
 
 import SummaryRow from './SummaryRow';
 

@@ -1,5 +1,6 @@
-import { noteCategory } from '../../../data';
-import { NoteStatsResult } from '../../../helpers/filterNotes';
+import { noteCategory } from 'data';
+
+import { NoteStatsResult } from 'helpers/filterNotes';
 
 type Props = {
   note: NoteStatsResult;

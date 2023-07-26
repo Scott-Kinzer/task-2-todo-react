@@ -1,19 +1,23 @@
 import { useFormik } from 'formik';
+import { useEffect } from 'react';
 import * as yup from 'yup';
 
-import { FormNoteProps } from '../../sections/Notes';
+import { FormNoteProps } from 'sections/Notes';
+import { Note } from 'types/noteTypes';
 
 type Props = {
   onSubmit: (values: FormNoteProps) => void;
+  note: Note | null;
 };
 
-const NoteForm = ({ onSubmit }: Props) => {
+const NoteForm = ({ onSubmit, note }: Props) => {
   const formik = useFormik({
     initialValues: {
-      name: '',
-      content: '',
-      category: 'task',
+      name: note?.name || '',
+      content: note?.content || '',
+      category: note?.category || 'task',
     },
+    enableReinitialize: true,
     validationSchema: yup.object({
       name: yup.string().required('Note name is required.'),
       content: yup.string().required('Note content is required.'),

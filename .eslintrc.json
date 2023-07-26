@@ -1,9 +1,14 @@
 {
-    "extends": ["next/core-web-vitals", 
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "prettier"],
-    "plugins": ["react", "@typescript-eslint"],
+    "extends": [ 
+      "eslint:recommended",
+      "prettier",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:prettier/recommended",
+      "plugin:import/recommended"
+  ],
+    
+    "plugins": ["react", "@typescript-eslint", "prettier"],
     "rules": {
       "no-unused-vars": "off",
       "no-multiple-empty-lines": ["error", { "max": 1 }],

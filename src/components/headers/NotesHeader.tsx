@@ -1,10 +1,11 @@
 import React from 'react';
 
 type Props = {
+  isArchive: boolean;
   toggleNote: () => void;
 };
 
-const HeaderNotes = ({ toggleNote }: Props) => {
+const HeaderNotes = ({ isArchive, toggleNote }: Props) => {
   return (
     <header className="header-notes grid grid-cols-headerNote gap-4 rounded-md bg-gray-500 p-4 text-white">
       <div className="flex items-center">
@@ -27,7 +28,9 @@ const HeaderNotes = ({ toggleNote }: Props) => {
           <img
             src="/images/icons/archive.svg"
             alt="archive"
-            className="w-[20px]"
+            className={`w-[20px] ${
+              isArchive ? 'bg-stone-700' : 'bg-transparent'
+            }`}
           />
         </div>
         <div className="trash-icon">
