@@ -1,17 +1,22 @@
+import { Provider } from 'react-redux';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
-import './App.css';
 import HomePage from './pages/HomePage';
+import { store } from './redux-toolkit/store';
+
+import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route>
-          <Route path="/" element={<HomePage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route>
+            <Route path="/" element={<HomePage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
