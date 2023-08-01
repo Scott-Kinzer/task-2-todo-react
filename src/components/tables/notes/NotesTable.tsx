@@ -24,6 +24,7 @@ const NotesTable = ({ notes, isArchive, chosenNote, chooseNote }: Props) => {
         return (
           <NoteRow
             isArchive={isArchive}
+            heightRow="md"
             toggleArchiveNote={(id: string) => {
               dispatch(toggleArchiveNote(id));
 

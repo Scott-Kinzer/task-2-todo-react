@@ -3,24 +3,39 @@ import { noteCategory } from 'data';
 import { extractDates } from 'helpers/extractDate';
 import { formatDate } from 'helpers/formatDate';
 import { Note } from 'types/noteTypes';
+import { StandardSizes } from 'types/view';
 
 type Props = {
+  rowColor?: RowColor;
   isArchive: boolean;
+  heightRow?: StandardSizes;
   note: Note;
   removeNote: (id: string) => void;
   toggleArchiveNote: (id: string) => void;
   editNote: (note: Note) => void;
 };
 
+export type RowColor = 'bg-salmon' | 'bg-mint' | 'bg-sandybrown';
+
+const rowHeightConfig: Record<StandardSizes, string> = {
+  sm: 'h-[50px]',
+  md: 'h-[80px]',
+  xl: 'h-[100px]',
+};
+
 const NoteRow = ({
+  heightRow = 'sm',
+  rowColor = 'bg-salmon',
   note,
   isArchive,
   removeNote,
   toggleArchiveNote,
   editNote,
 }: Props) => {
+  const rowHeight = rowHeightConfig[heightRow];
   return (
-    <div className="note-item mt-[20px] grid h-[80px] grid-cols-tableNote gap-[20px] rounded-md bg-green-500 p-[10px]">
+    <div
+      className={`note-item mt-[20px] grid ${rowHeight} grid-cols-tableNote gap-[20px] rounded-md ${rowColor} p-[10px]`}>
       <div className="note-name flex items-center gap-[10px]">
         <img
           src={noteCategory[note.category].imagePath}

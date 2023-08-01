@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
+import NoteButton from 'components/buttons/NoteButton';
 import NoteForm from 'components/form/NoteForm';
 import HeaderNotes from 'components/headers/NotesHeader';
 import NotesTable from 'components/tables/notes/NotesTable';
@@ -76,14 +77,12 @@ const Notes = () => {
         isArchive={isArchive}
         notes={filteredNotes}
       />
-      <button
-        className="ml-auto mt-5 block h-10 w-28 rounded-lg bg-slate-300 text-black"
-        onClick={() => {
-          setIsShowForm(!isShowForm);
-          setChosenNoteForEdition(null);
-        }}>
-        {isShowForm ? 'Hide Form' : 'Create note'}
-      </button>
+      <NoteButton
+        color="bg-sandybrown"
+        setChosenNoteForEdition={setChosenNoteForEdition}
+        isShowForm={isShowForm}
+        setIsShowForm={setIsShowForm}
+      />
 
       {isShowForm && (
         <NoteForm onSubmit={onSubmit} note={chosenNoteForEdition} />
