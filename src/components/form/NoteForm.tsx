@@ -1,9 +1,11 @@
 import { useFormik } from 'formik';
-import { useEffect } from 'react';
 import * as yup from 'yup';
 
 import { FormNoteProps } from 'sections/Notes';
 import { Note } from 'types/noteTypes';
+
+import DropDownInput from './DropDownInput';
+import FormInput from './FormInput';
 
 type Props = {
   onSubmit: (values: FormNoteProps) => void;
@@ -30,46 +32,31 @@ const NoteForm = ({ onSubmit, note }: Props) => {
 
   return (
     <form
-      className="note-form grid grid-cols-tripleFr gap-x-[20px] gap-y-[40px] p-[20px]"
+      className="note-form grid grid-cols-tripleFr items-baseline	gap-x-[20px] gap-y-[40px] p-[20px]"
       onSubmit={formik.handleSubmit}>
-      <div className="relative block">
-        <input
-          id="note-form-name"
-          className=" h-[40px] w-[100%] rounded-md p-[5px]"
-          placeholder="Note name"
-          type="text"
-          {...formik.getFieldProps('name')}
-        />
-        {formik.touched.name && formik.errors.name ? (
-          <div className="absolute bottom-[-25px] text-red-600">
-            {formik.errors.name}
-          </div>
-        ) : null}
-      </div>
-      <div className="relative block">
-        <input
-          id="note-form-content"
-          className="h-[40px] w-[100%] rounded-md p-[5px]"
-          placeholder="Note content"
-          type="text"
-          {...formik.getFieldProps('content')}
-        />
-        {formik.touched.content && formik.errors.content ? (
-          <div className="absolute bottom-[-25px] text-red-600">
-            {formik.errors.content}
-          </div>
-        ) : null}
-      </div>
-
-      <select
+      <FormInput
+        id="note-form-name"
+        placeholder="Note name"
+        heightInput="sm"
+        type="text"
+        touched={formik.touched.name}
+        errors={formik.errors.name}
+        {...formik.getFieldProps('name')}
+      />
+      <FormInput
+        id="note-form-content"
+        placeholder="Note content"
+        heightInput="sm"
+        type="text"
+        touched={formik.touched.content}
+        errors={formik.errors.content}
+        {...formik.getFieldProps('content')}
+      />
+      <DropDownInput
         id="note-form-category"
-        className="h-[40px] rounded-md p-[5px]"
-        {...formik.getFieldProps('category')}>
-        <option value="task">Task</option>
-        <option value="thought">Random Thought</option>
-        <option value="idea">Idea</option>
-        <option value="quote">Quote</option>
-      </select>
+        {...formik.getFieldProps('category')}
+        paddingSize="md"
+      />
       <button type="submit" className="col-start-2 h-[40px] bg-slate-500">
         Submit form
       </button>
